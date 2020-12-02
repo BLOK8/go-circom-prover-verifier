@@ -4,7 +4,7 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/iden3/go-circom-prover-verifier/types"
+	"github.com/BLOK8/go-circom-prover-verifier/types"
 	"github.com/iden3/go-iden3-crypto/ff"
 )
 

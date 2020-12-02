@@ -14,24 +14,24 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/BLOK8/go-circom-prover-verifier/types"
 	bn256 "github.com/ethereum/go-ethereum/crypto/bn256/cloudflare"
-	"github.com/iden3/go-circom-prover-verifier/types"
 )
 
 // PkString is the equivalent to the Pk struct in string representation, containing the ProvingKey
 type PkString struct {
-	A          [][]string          `json:"A"`
-	B2         [][][]string        `json:"B2"`
-	B1         [][]string          `json:"B1"`
-	C          [][]string          `json:"C"`
+	A          []string            `json:"A"`
+	B2         []string            `json:"B2"`
+	B1         []string            `json:"B1"`
+	C          []string            `json:"C"`
 	NVars      int                 `json:"nVars"`
 	NPublic    int                 `json:"nPublic"`
-	VkAlpha1   []string            `json:"vk_alfa_1"`
-	VkDelta1   []string            `json:"vk_delta_1"`
-	VkBeta1    []string            `json:"vk_beta_1"`
-	VkBeta2    [][]string          `json:"vk_beta_2"`
-	VkDelta2   [][]string          `json:"vk_delta_2"`
-	HExps      [][]string          `json:"hExps"`
+	VkAlpha1   string              `json:"vk_alpha_1"`
+	VkDelta1   string              `json:"vk_delta_1"`
+	VkBeta1    string              `json:"vk_beta_1"`
+	VkBeta2    string              `json:"vk_beta_2"`
+	VkDelta2   string              `json:"vk_delta_2"`
+	HExps      []string            `json:"hExps"`
 	DomainSize int                 `json:"domainSize"`
 	PolsA      []map[string]string `json:"polsA"`
 	PolsB      []map[string]string `json:"polsB"`

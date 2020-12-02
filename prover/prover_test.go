@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/iden3/go-circom-prover-verifier/parsers"
-	"github.com/iden3/go-circom-prover-verifier/verifier"
+	"github.com/BLOK8/go-circom-prover-verifier/parsers"
+	"github.com/BLOK8/go-circom-prover-verifier/verifier"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
