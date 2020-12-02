@@ -20,18 +20,18 @@ import (
 
 // PkString is the equivalent to the Pk struct in string representation, containing the ProvingKey
 type PkString struct {
-	A          []string            `json:"A"`
-	B2         []string            `json:"B2"`
-	B1         []string            `json:"B1"`
-	C          []string            `json:"C"`
+	A          [][]string          `json:"A"`
+	B2         [][][]string        `json:"B2"`
+	B1         [][]string          `json:"B1"`
+	C          [][]string          `json:"C"`
 	NVars      int                 `json:"nVars"`
 	NPublic    int                 `json:"nPublic"`
-	VkAlpha1   string              `json:"vk_alpha_1"`
-	VkDelta1   string              `json:"vk_delta_1"`
-	VkBeta1    string              `json:"vk_beta_1"`
-	VkBeta2    string              `json:"vk_beta_2"`
-	VkDelta2   string              `json:"vk_delta_2"`
-	HExps      []string            `json:"hExps"`
+	VkAlpha1   []string            `json:"vk_alfa_1"`
+	VkDelta1   []string            `json:"vk_delta_1"`
+	VkBeta1    []string            `json:"vk_beta_1"`
+	VkBeta2    [][]string          `json:"vk_beta_2"`
+	VkDelta2   [][]string          `json:"vk_delta_2"`
+	HExps      [][]string          `json:"hExps"`
 	DomainSize int                 `json:"domainSize"`
 	PolsA      []map[string]string `json:"polsA"`
 	PolsB      []map[string]string `json:"polsB"`
@@ -91,18 +91,22 @@ func pkStringToPk(ps PkString) (*types.Pk, error) {
 	var p types.Pk
 	var err error
 
+	fmt.Println("Array String to G1 ps.A")
 	p.A, err = arrayStringToG1(ps.A)
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("Array String to G2 ps.B2")
 	p.B2, err = arrayStringToG2(ps.B2)
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("Array String to G1 ps.B1")
 	p.B1, err = arrayStringToG1(ps.B1)
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("Array String to G1 ps.C")
 	p.C, err = arrayStringToG1(ps.C)
 	if err != nil {
 		return nil, err
@@ -111,16 +115,19 @@ func pkStringToPk(ps PkString) (*types.Pk, error) {
 	p.NVars = ps.NVars
 	p.NPublic = ps.NPublic
 
+	fmt.Println("String to G1 ps.VkAlpha1")
 	p.VkAlpha1, err = stringToG1(ps.VkAlpha1)
 	if err != nil {
 		return nil, err
 	}
 
+	fmt.Println("String to G1 ps.VkDelta1")
 	p.VkDelta1, err = stringToG1(ps.VkDelta1)
 	if err != nil {
 		return nil, err
 	}
 
+	fmt.Println("String to G1 ps.VkBeta1")
 	p.VkBeta1, err = stringToG1(ps.VkBeta1)
 	if err != nil {
 		return nil, err
@@ -134,6 +141,7 @@ func pkStringToPk(ps PkString) (*types.Pk, error) {
 		return nil, err
 	}
 
+	fmt.Println("Array String to G1 ps.HExps")
 	p.HExps, err = arrayStringToG1(ps.HExps)
 	if err != nil {
 		return nil, err
@@ -156,6 +164,7 @@ func pkStringToPk(ps PkString) (*types.Pk, error) {
 func proofStringToProof(pr ProofString) (*types.Proof, error) {
 	var p types.Proof
 	var err error
+	fmt.Println("String to G1 pr.A")
 	p.A, err = stringToG1(pr.A)
 	if err != nil {
 		return nil, err
@@ -165,7 +174,7 @@ func proofStringToProof(pr ProofString) (*types.Proof, error) {
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Println("String to G1 pr.C")
 	p.C, err = stringToG1(pr.C)
 	if err != nil {
 		return nil, err
@@ -217,6 +226,7 @@ func ParseVk(vj []byte) (*types.Vk, error) {
 func vkStringToVk(vr VkString) (*types.Vk, error) {
 	var v types.Vk
 	var err error
+	fmt.Println("String to G1 vr.Alpha")
 	v.Alpha, err = stringToG1(vr.Alpha)
 	if err != nil {
 		return nil, err
@@ -238,6 +248,7 @@ func vkStringToVk(vr VkString) (*types.Vk, error) {
 	}
 
 	for i := 0; i < len(vr.IC); i++ {
+		fmt.Println("String to G1 vr.IC")
 		p, err := stringToG1(vr.IC[i])
 		if err != nil {
 			return nil, err
@@ -361,6 +372,7 @@ func arrayStringToG2(h [][][]string) ([]*bn256.G2, error) {
 }
 
 func stringToG1(h []string) (*bn256.G1, error) {
+	fmt.Println("Inside String to G1: length: ", len(h))
 	if len(h) <= 2 {
 		return nil, fmt.Errorf("not enought data for stringToG1")
 	}
