@@ -374,6 +374,7 @@ func arrayStringToG2(h [][][]string) ([]*bn256.G2, error) {
 func stringToG1(h []string) (*bn256.G1, error) {
 	fmt.Println("Inside String to G1: length: ", len(h))
 	if len(h) <= 2 {
+		fmt.Println(len(h), h, "This is the place of error")
 		return nil, fmt.Errorf("not enought data for stringToG1")
 	}
 	h = h[:2]
